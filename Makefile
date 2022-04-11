@@ -15,7 +15,7 @@ run:	all
 # This is the actual disk image that the computer loads
 # which is the combination of our compiled bootsector and kernel
 # $^ is substituted with all of the target 's dependancy files
-os-image:	Boot/boot_sect.bin kernel.bin
+os-image:	boot/boot_sect.bin kernel.bin
 	cat $^ > os-image
 
 # This builds the binary of our kernel from two object files :
@@ -37,8 +37,8 @@ kernel.bin:	kernel/kernel_entry.o ${OBJ}
 	nasm $< -f elf -o $@
 
 %.bin:	%.asm
-	nasm $< -f bin -I 'Boot/' -o $@
+	nasm $< -f bin -I 'boot/' -o $@
 
 clean:
 	rm -rf *.bin os-image
-	rm -rf kernel/*.o Boot/*.bin drivers/*.o memory/*.o
+	rm -rf kernel/*.o boot/*.bin drivers/*.o memory/*.o
